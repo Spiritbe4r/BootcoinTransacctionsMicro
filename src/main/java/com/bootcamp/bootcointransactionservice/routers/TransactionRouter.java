@@ -16,6 +16,7 @@ public class TransactionRouter {
 
     return route(POST("/api/bootcoin-transaction"), handler::createTransaction)
           .andRoute(GET("/api/bootcoin-transaction"), handler::findAll)
+          .andRoute(GET("/api/bootcoin-transaction/{id}"), handler::findTranctionById)
           .andRoute(DELETE("/api/bootcoin-transaction/{id}"), handler::delete);
   }
 }

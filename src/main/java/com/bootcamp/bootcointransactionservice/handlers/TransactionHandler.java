@@ -35,6 +35,14 @@ public class TransactionHandler {
           .body(service.findAll(), Transaction.class);
   }
 
+  public Mono<ServerResponse> findTranctionById(ServerRequest request) {
+    String id = request.pathVariable("id");
+
+    return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
+          .body(service.findById(id), Transaction.class)
+          .switchIfEmpty(ServerResponse.notFound().build());
+  }
+
   public Mono<ServerResponse> delete(ServerRequest request) {
     String id = request.pathVariable("id");
     Mono<Transaction> accountMono = service.findById(id);
